@@ -56,6 +56,7 @@ Working docs go in `.dev/`. Move to `docs/` when finalized.
 
 | Command | Purpose |
 |---------|---------|
+| `/init` | Create/review project CLAUDE.md, create skills |
 | `/branch` | Create branch with good name |
 | `/verify` | Lint, build, test (add `review` for deep analysis) |
 | `/commit` | Staged → commit |
