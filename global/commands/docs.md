@@ -33,7 +33,31 @@ If $ARGUMENTS is empty:
 4. Ask user to confirm before moving
 5. Move files, update any internal links
 
-If $ARGUMENTS provided:
+If $ARGUMENTS is "sync" or "update":
+1. Review git history for recent changes:
+   ```bash
+   git log --oneline -20
+   git diff --stat HEAD~10
+   ```
+2. Check if README.md reflects current state:
+   - Project description accurate?
+   - Install/usage instructions current?
+   - Features list up to date?
+3. Check if CHANGELOG.md needs updating (if exists)
+4. Scan docs/ for outdated content
+5. Propose updates, ask for confirmation before editing
+
+If $ARGUMENTS is "readme":
+1. Analyze codebase: package.json, main files, structure
+2. Review recent git history for context
+3. Update or generate README.md with:
+   - Project description
+   - Install instructions
+   - Usage examples
+   - Current features
+4. Keep it concise — link to docs/ for details
+
+If $ARGUMENTS is other text:
 1. Create the requested doc in `docs/` folder
 2. Use clear heading structure
 3. Keep it concise
@@ -42,6 +66,9 @@ If $ARGUMENTS provided:
 
 ```
 /docs                     # Find and organize scattered docs
+/docs sync                # Update docs based on git history
+/docs update              # Same as sync
+/docs readme              # Update README.md from codebase
 /docs api reference       # Create docs/api-reference.md
 /docs architecture        # Create docs/architecture.md
 ```
