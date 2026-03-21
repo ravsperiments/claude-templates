@@ -28,6 +28,9 @@ cd claude-templates
 ./install.sh <template>   # Init project with template CLAUDE.md
 ```
 
+**After pulling updates:** Re-run `./install.sh` to link new commands.
+Existing symlinks auto-refresh content, but new files need linking.
+
 ### Examples
 
 ```bash
