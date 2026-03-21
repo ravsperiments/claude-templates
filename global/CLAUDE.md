@@ -57,7 +57,7 @@ Working docs go in `.dev/`. Move to `docs/` when finalized.
 | Command | Purpose |
 |---------|---------|
 | `/branch` | Create branch with good name |
-| `/verify` | Lint, build, test |
+| `/verify` | Lint, build, test (add `review` for deep analysis) |
 | `/commit` | Staged → commit |
 | `/pr` | Push + create PR |
 | `/docs` | Organize or create documentation |

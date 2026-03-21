@@ -1,8 +1,13 @@
 # Verify Project
 
-Run lint, build, test before committing.
+Run lint, build, test before committing. Optionally perform deep code review.
 
-## Instructions
+## Usage
+
+- `/verify` — Run lint, build, test
+- `/verify review` — Deep code quality review
+
+## Standard Verification
 
 1. Detect stack from files:
 
@@ -28,5 +33,62 @@ Ready to commit: YES/NO
 ```
 
 If ANY fails: show error, suggest fix, do NOT proceed.
+
+## Deep Review (`/verify review`)
+
+Analyze codebase for quality and philosophy adherence. No commands run — this is static analysis.
+
+### 1. Philosophy Violations
+
+Scan for banned patterns:
+
+| Violation | What to find |
+|-----------|--------------|
+| Single-use helpers | Functions called only once — should be inlined |
+| Single-use abstractions | Interfaces/classes with one implementation |
+| "Just in case" code | Unused parameters, empty catch blocks, dead branches |
+| Debug artifacts | `console.log`, `print()`, `debugger`, commented-out code |
+| Scattered docs | `.md` files outside `docs/` (except README.md, CLAUDE.md) |
+
+### 2. File Structure
+
+Check organization:
+
+| Check | Expected |
+|-------|----------|
+| `.dev/` ignored | Must be in `.gitignore` if `.dev/` exists |
+| Docs location | Markdown in `docs/` or root (README.md, CLAUDE.md only) |
+| No orphans | No unused/unreferenced files |
+| Clean root | Minimal files in project root |
+
+### 3. Complexity Signals
+
+Flag over-engineering:
+
+| Signal | Example |
+|--------|---------|
+| Enterprise patterns | Factories, DI containers, service locators |
+| Excessive abstraction | >2 levels of inheritance, decorator stacking |
+| Config bloat | Multiple config formats, environment matrices |
+| Wrapper functions | Functions that just call another function |
+
+### 4. Report Format
+
+```
+Code Review:
+- Philosophy: PASS/ISSUES (n found)
+- Structure: PASS/ISSUES (n found)
+- Complexity: PASS/ISSUES (n found)
+
+[If issues found, list each with file:line and recommendation]
+```
+
+### 5. Severity
+
+- **Block**: Security issues, obvious bugs
+- **Warn**: Philosophy violations, complexity
+- **Note**: Style suggestions, minor improvements
+
+Only "Block" items prevent commit. Others are recommendations.
 
 $ARGUMENTS
