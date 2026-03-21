@@ -80,10 +80,27 @@ Code Review:
 - Structure: PASS/ISSUES (n found)
 - Complexity: PASS/ISSUES (n found)
 
+Score: X/10
+
 [If issues found, list each with file:line and recommendation]
 ```
 
-### 5. Severity
+### 5. Scoring
+
+| Score | Meaning |
+|-------|---------|
+| 10 | Clean — no issues found |
+| 8-9 | Good — minor notes only |
+| 6-7 | Fair — some warnings, no blockers |
+| 4-5 | Needs work — multiple warnings |
+| 1-3 | Poor — blockers present |
+
+Deductions:
+- Block issue: -3 each
+- Warn issue: -1 each
+- Note: -0.5 each (cap at -2 total)
+
+### 6. Severity
 
 - **Block**: Security issues, obvious bugs
 - **Warn**: Philosophy violations, complexity
