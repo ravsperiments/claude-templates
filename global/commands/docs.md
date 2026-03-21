@@ -7,13 +7,130 @@ Keep docs organized, never scattered.
 ```
 project/
 ├── README.md              # Project overview only
-├── docs/                  # All other documentation
-│   ├── getting-started.md
-│   ├── architecture.md
-│   ├── api.md
-│   └── ...
-└── CLAUDE.md              # Claude instructions (root)
+├── CLAUDE.md              # Claude instructions
+└── docs/
+    ├── spec.md            # Business requirements (what & why)
+    ├── architecture.md    # Technical design (how)
+    ├── plan.md            # Execution plan (when & order)
+    ├── getting-started.md
+    ├── api.md
+    └── features/
+        └── <feature-name>/
+            ├── spec.md    # Feature requirements
+            ├── design.md  # Feature technical design
+            └── plan.md    # Feature implementation plan
 ```
+
+## Standard Doc Types
+
+### spec.md — Business Requirements
+
+```markdown
+# <Project/Feature> Spec
+
+## Problem
+What problem are we solving? Why does this matter?
+
+## Goals
+- Goal 1
+- Goal 2
+
+## Non-Goals
+What we're explicitly NOT doing.
+
+## Requirements
+| ID | Requirement | Priority |
+|----|-------------|----------|
+| R1 | Description | Must/Should/Could |
+
+## Success Criteria
+How do we know this is done?
+```
+
+### architecture.md — Technical Design
+
+```markdown
+# <Project/Feature> Architecture
+
+## Overview
+High-level technical approach in 2-3 sentences.
+
+## Components
+| Component | Purpose |
+|-----------|---------|
+| Name | What it does |
+
+## Data Flow
+How data moves through the system. Use simple diagrams if needed.
+
+## Dependencies
+External services, libraries, APIs.
+
+## Constraints
+Technical limitations, performance requirements.
+
+## Decisions
+| Decision | Rationale |
+|----------|-----------|
+| Choice made | Why |
+```
+
+### design.md — Feature Technical Design
+
+```markdown
+# <Feature> Design
+
+## Approach
+How we're building this feature.
+
+## Changes
+| File/Component | Change |
+|----------------|--------|
+| path/to/file | What changes |
+
+## Interface
+API, props, or function signatures.
+
+## Edge Cases
+How we handle them.
+```
+
+### plan.md — Execution Plan
+
+```markdown
+# <Project/Feature> Plan
+
+## Phases
+| Phase | Description | Depends On |
+|-------|-------------|------------|
+| 1 | What to do first | - |
+| 2 | What comes next | Phase 1 |
+
+## Tasks
+- [ ] Task 1
+- [ ] Task 2
+
+## Risks
+| Risk | Mitigation |
+|------|------------|
+| What could go wrong | How we handle it |
+```
+
+## Naming Convention
+
+| Pattern | Example | Use for |
+|---------|---------|---------|
+| `kebab-case.md` | `getting-started.md` | Standard docs |
+| `UPPERCASE.md` | `README.md` | Root-level special files only |
+
+Rules:
+- Always lowercase with hyphens: `api-reference.md` not `API_Reference.md`
+- No spaces or underscores: `quick-start.md` not `quick_start.md`
+- Be specific: `auth-flow.md` not `auth.md`
+- No version numbers: `migration.md` not `migration-v2.md`
+
+Reserved uppercase names (root only):
+- `README.md`, `CLAUDE.md`, `CHANGELOG.md`, `LICENSE.md`
 
 ## Rules
 
@@ -114,6 +231,16 @@ MIT (or whatever applies)
 - Quick Start must actually work — test it
 - Link to docs/ for anything longer than 3 lines
 
+If $ARGUMENTS is "spec", "architecture", or "plan":
+1. Create the doc in `docs/` using the template above
+2. Pre-fill sections based on codebase analysis
+3. Ask user to review and refine
+
+If $ARGUMENTS is "feature <name>":
+1. Create `docs/features/<name>/` directory
+2. Create spec.md, design.md, plan.md using templates
+3. Pre-fill based on any existing context
+
 If $ARGUMENTS is other text:
 1. Create the requested doc in `docs/` folder
 2. Use clear heading structure
@@ -126,8 +253,11 @@ If $ARGUMENTS is other text:
 /docs sync                # Update docs based on git history
 /docs update              # Same as sync
 /docs readme              # Update README.md from codebase
+/docs spec                # Create docs/spec.md from template
+/docs architecture        # Create docs/architecture.md from template
+/docs plan                # Create docs/plan.md from template
+/docs feature auth        # Create docs/features/auth/ with spec, design, plan
 /docs api reference       # Create docs/api-reference.md
-/docs architecture        # Create docs/architecture.md
 ```
 
 $ARGUMENTS
