@@ -28,6 +28,7 @@ NEVER:
 - "Just in case" code
 - Unrelated refactors
 - Debug statements or commented-out code
+- Scatter docs — all markdown goes in `docs/` (except README.md, CLAUDE.md)
 
 ## What Kills PRs
 
@@ -49,3 +50,4 @@ Fix these first. Everything else is fixable in review.
 | `/verify` | Lint, build, test |
 | `/commit` | Staged → commit |
 | `/pr` | Push + create PR |
+| `/docs` | Organize or create documentation |
