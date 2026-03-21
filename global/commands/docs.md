@@ -201,6 +201,19 @@ How system handles growth:
 - Vertical: Resource limits
 - Data: Partitioning strategy
 
+## Testing Strategy
+
+| Type | Scope | Tools |
+|------|-------|-------|
+| Unit | Functions, utils | Jest/Vitest |
+| Integration | API, DB | Supertest |
+| E2E | User flows | Playwright |
+
+Key test areas:
+- Critical paths (auth, payments)
+- Edge cases
+- Error handling
+
 ## Decisions
 
 | Decision | Options considered | Choice | Rationale |
@@ -512,85 +525,6 @@ Format: `type(scope): description`
 - Request review
 ```
 
-### testing.md — Testing Guide
-
-```markdown
-# Testing
-
-How to test this project.
-
-## Quick Start
-
-```bash
-# Run all tests
-npm test
-
-# Run with coverage
-npm run test:coverage
-
-# Run specific test
-npm test -- --grep "test name"
-```
-
-## Test Structure
-
-```
-tests/
-├── unit/           # Unit tests
-├── integration/    # Integration tests
-└── e2e/            # End-to-end tests
-```
-
-## Test Types
-
-| Type | Purpose | Speed | Scope |
-|------|---------|-------|-------|
-| Unit | Test functions in isolation | Fast | Single function |
-| Integration | Test components together | Medium | Multiple units |
-| E2E | Test full user flows | Slow | Entire app |
-
-## Writing Tests
-
-```typescript
-describe('Feature', () => {
-  it('should do X when Y', () => {
-    // Arrange
-    const input = 'test';
-
-    // Act
-    const result = feature(input);
-
-    // Assert
-    expect(result).toBe('expected');
-  });
-});
-```
-
-## Coverage Requirements
-
-| Metric | Minimum |
-|--------|---------|
-| Statements | 80% |
-| Branches | 75% |
-| Functions | 80% |
-| Lines | 80% |
-
-## Test Data
-
-| Data | Location | Purpose |
-|------|----------|---------|
-| Fixtures | `tests/fixtures/` | Static test data |
-| Factories | `tests/factories/` | Dynamic test data |
-| Mocks | `tests/mocks/` | External service mocks |
-
-## CI/CD
-
-Tests run automatically on:
-- Pull request
-- Push to main
-- Nightly schedule
-```
-
 ### runbook.md — Operations Runbook
 
 ```markdown
@@ -805,12 +739,11 @@ For known doc types, check against templates and add missing sections:
 | Doc Type | Required Sections |
 |----------|-------------------|
 | spec.md | Problem, Users, Goals, Non-Goals, Requirements, Success Criteria |
-| architecture.md | Overview, Components, Data Model, Security, Decisions |
+| architecture.md | Overview, Components, Data Model, Security, Testing Strategy, Decisions |
 | design.md | Approach, Changes, Interface, Edge Cases |
 | plan.md | Phases, Tasks, Dependencies, Risks |
 | api.md | Base URL, Auth, Endpoints, Errors |
 | deployment.md | Environments, Env Vars, Deploy Steps, Rollback |
-| testing.md | Quick Start, Test Structure, Test Types, Coverage |
 | runbook.md | Contacts, Common Incidents, Maintenance, Escalation |
 
 If doc matches a known type but is missing sections → add them.
