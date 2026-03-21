@@ -12,7 +12,6 @@ project/
     ├── spec.md            # Project-level requirements
     ├── architecture.md    # Project-level design
     ├── plan.md            # Project-level execution plan
-    ├── getting-started.md
     ├── api.md
     │
     ├── features/          # Simple: feature-level docs
@@ -452,57 +451,6 @@ vercel rollback
 | 500 errors | DB connection | Check DATABASE_URL |
 ```
 
-### changelog.md — Change Log
-
-```markdown
-# Changelog
-
-All notable changes to this project.
-
-Format: [Keep a Changelog](https://keepachangelog.com/)
-
-## [Unreleased]
-
-### Added
-- New feature X
-
-### Changed
-- Modified behavior Y
-
-### Fixed
-- Bug fix Z
-
-## [1.0.0] - 2024-01-15
-
-### Added
-- Initial release
-- Feature A
-- Feature B
-
-### Changed
-- Updated dependency X
-
-### Deprecated
-- Old API endpoint
-
-### Removed
-- Legacy feature
-
-### Fixed
-- Issue #123
-
-### Security
-- Patched vulnerability
-```
-
-Categories (use only what applies):
-- **Added** — New features
-- **Changed** — Changes to existing functionality
-- **Deprecated** — Soon-to-be removed features
-- **Removed** — Removed features
-- **Fixed** — Bug fixes
-- **Security** — Vulnerability fixes
-
 ### contributing.md — Contribution Guide
 
 ```markdown
@@ -775,7 +723,7 @@ Let Claude determine appropriate sections based on content purpose.
 
 | Pattern | Example | Use for |
 |---------|---------|---------|
-| `kebab-case.md` | `getting-started.md` | Standard docs |
+| `kebab-case.md` | `api-reference.md` | Standard docs |
 | `UPPERCASE.md` | `README.md` | Root-level special files only |
 
 Rules:
@@ -862,7 +810,6 @@ For known doc types, check against templates and add missing sections:
 | plan.md | Phases, Tasks, Dependencies, Risks |
 | api.md | Base URL, Auth, Endpoints, Errors |
 | deployment.md | Environments, Env Vars, Deploy Steps, Rollback |
-| changelog.md | Unreleased + versioned sections with Added/Changed/Fixed |
 | testing.md | Quick Start, Test Structure, Test Types, Coverage |
 | runbook.md | Contacts, Common Incidents, Maintenance, Escalation |
 
@@ -873,7 +820,7 @@ For each doc, check:
 | Issue | Fix |
 |-------|-----|
 | Emoji | Remove |
-| Changelog/history in non-changelog | Remove (use git) |
+| Changelog/history | Remove (use git) |
 | File listings | Remove (use codebase) |
 | Marketing speak | Rewrite plainly |
 | Excessive detail | Summarize, link to code |
