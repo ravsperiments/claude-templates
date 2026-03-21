@@ -9,17 +9,62 @@ project/
 ├── README.md              # Project overview only
 ├── CLAUDE.md              # Claude instructions
 └── docs/
-    ├── spec.md            # Business requirements (what & why)
-    ├── architecture.md    # Technical design (how)
-    ├── plan.md            # Execution plan (when & order)
+    ├── spec.md            # Project-level requirements
+    ├── architecture.md    # Project-level design
+    ├── plan.md            # Project-level execution plan
     ├── getting-started.md
     ├── api.md
-    └── features/
-        └── <feature-name>/
-            ├── spec.md    # Feature requirements
-            ├── design.md  # Feature technical design
-            └── plan.md    # Feature implementation plan
+    │
+    ├── features/          # Simple: feature-level docs
+    │   └── <feature-name>/
+    │       ├── spec.md
+    │       ├── design.md
+    │       └── plan.md
+    │
+    ├── milestones/        # Complex: milestone → features
+    │   └── <milestone-name>/
+    │       ├── spec.md    # Milestone-level spec
+    │       ├── plan.md    # Milestone-level plan
+    │       └── features/
+    │           └── <feature-name>/
+    │               ├── spec.md
+    │               ├── design.md
+    │               └── plan.md
+    │
+    └── archive/           # Completed/obsolete docs
+        └── <date>-<name>.md
 ```
+
+## Hierarchy
+
+Standard docs (spec.md, design.md, architecture.md, plan.md) can exist at any level:
+
+| Level | Scope | Example |
+|-------|-------|---------|
+| `docs/` | Entire project | `docs/spec.md` |
+| `docs/milestones/<name>/` | Milestone | `docs/milestones/v1/spec.md` |
+| `docs/features/<name>/` | Feature | `docs/features/auth/spec.md` |
+| `docs/milestones/<m>/features/<f>/` | Feature in milestone | `docs/milestones/v1/features/auth/spec.md` |
+
+Choose the simplest structure that fits:
+- Solo feature? Use `docs/features/<name>/`
+- Multiple related features? Use `docs/milestones/<name>/`
+
+## Archive
+
+Move completed or obsolete docs to `docs/archive/`:
+
+```
+docs/archive/
+├── 2024-01-auth-spec.md       # Completed feature spec
+├── 2024-02-old-architecture.md # Superseded design
+└── 2024-03-v1-plan.md          # Finished milestone plan
+```
+
+Rules:
+- Prefix with date: `YYYY-MM-<original-name>.md`
+- Keep for reference, don't delete
+- Archive when: feature shipped, design superseded, or plan completed
 
 ## Standard Doc Types
 
@@ -241,6 +286,20 @@ If $ARGUMENTS is "feature <name>":
 2. Create spec.md, design.md, plan.md using templates
 3. Pre-fill based on any existing context
 
+If $ARGUMENTS is "milestone <name>":
+1. Create `docs/milestones/<name>/` directory
+2. Create spec.md, plan.md at milestone level
+3. Ask if features should be added
+
+If $ARGUMENTS is "milestone <milestone> feature <name>":
+1. Create `docs/milestones/<milestone>/features/<name>/`
+2. Create spec.md, design.md, plan.md using templates
+
+If $ARGUMENTS is "archive <path>":
+1. Move the doc to `docs/archive/` with date prefix
+2. Format: `YYYY-MM-<original-name>.md`
+3. Update any links pointing to the archived doc
+
 If $ARGUMENTS is other text:
 1. Create the requested doc in `docs/` folder
 2. Use clear heading structure
@@ -251,12 +310,24 @@ If $ARGUMENTS is other text:
 ```
 /docs                     # Find and organize scattered docs
 /docs sync                # Update docs based on git history
-/docs update              # Same as sync
 /docs readme              # Update README.md from codebase
-/docs spec                # Create docs/spec.md from template
-/docs architecture        # Create docs/architecture.md from template
-/docs plan                # Create docs/plan.md from template
+
+# Project-level docs
+/docs spec                # Create docs/spec.md
+/docs architecture        # Create docs/architecture.md
+/docs plan                # Create docs/plan.md
+
+# Feature docs
 /docs feature auth        # Create docs/features/auth/ with spec, design, plan
+
+# Milestone docs
+/docs milestone v1        # Create docs/milestones/v1/ with spec, plan
+/docs milestone v1 feature auth  # Create docs/milestones/v1/features/auth/
+
+# Archive
+/docs archive docs/features/auth/spec.md  # Move to docs/archive/2024-03-auth-spec.md
+
+# Other
 /docs api reference       # Create docs/api-reference.md
 ```
 
