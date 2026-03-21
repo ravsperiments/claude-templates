@@ -28,8 +28,13 @@ cd claude-templates
 ./install.sh <template>   # Init project with template CLAUDE.md
 ```
 
-**After pulling updates:** Re-run `./install.sh` to link new commands.
-Existing symlinks auto-refresh content, but new files need linking.
+**Auto-update via cron:**
+```bash
+# Add to crontab -e (runs every 30 min)
+*/30 * * * * ~/path/to/claude-templates/update.sh
+```
+
+Or manually: `git pull && ./install.sh`
 
 ### Examples
 
@@ -47,15 +52,19 @@ cd ~/projects/my-ml-project
 ```
 claude-templates/
 ├── install.sh
+├── update.sh                # Auto-update script
 ├── README.md
 ├── global/                  # Global ~/.claude config
 │   ├── CLAUDE.md
 │   ├── settings.json
 │   └── commands/
 │       ├── branch.md
-│       ├── verify.md
 │       ├── commit.md
-│       └── pr.md
+│       ├── dev.md
+│       ├── docs.md
+│       ├── init.md
+│       ├── pr.md
+│       └── verify.md
 └── templates/               # Project-specific templates
     ├── ml/
     │   └── CLAUDE.md
@@ -65,9 +74,23 @@ claude-templates/
         └── CLAUDE.md
 ```
 
+## Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/init` | Create/review project CLAUDE.md |
+| `/branch` | Create branch with good name |
+| `/verify` | Lint, build, test (add `review` for deep analysis) |
+| `/commit` | Staged → commit |
+| `/pr` | Push + create PR |
+| `/docs` | Organize documentation (add `review` for cleanup) |
+| `/dev` | Manage .dev/ workspace |
+
 ## Workflow
 
 ```
+/init                    →  Create project CLAUDE.md
+    ↓
 /branch add user auth    →  feat/user-auth
     ↓
     ... work ...
