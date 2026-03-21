@@ -21,12 +21,18 @@ Every CLAUDE.md and skill must follow:
 
 ## Create Project CLAUDE.md (`/init`)
 
-1. Analyze the project:
+1. Read global CLAUDE.md (`~/.claude/CLAUDE.md`) first
+2. Analyze the project:
    - Stack (package.json, Cargo.toml, etc.)
    - Structure (src/, lib/, etc.)
    - Existing patterns
 
-2. Generate CLAUDE.md with sections:
+3. Generate CLAUDE.md with sections:
+
+**IMPORTANT: Do NOT repeat content from global CLAUDE.md**
+- Global already covers: workflow, bans, code style, file organization, commands
+- Project CLAUDE.md should ONLY contain project-specific information
+- If something applies globally, it belongs in global — not here
 
 ```markdown
 # <Project Name>
@@ -59,18 +65,20 @@ Every CLAUDE.md and skill must follow:
 <Project-specific rules, if any>
 ```
 
-3. Keep it concise — link to docs/ for details
-4. Ask user to review before writing
+4. Keep it concise — link to docs/ for details
+5. Ask user to review before writing
 
 ## Review CLAUDE.md (`/init review`)
 
-1. Read existing project CLAUDE.md
-2. Score against philosophy:
+1. Read global CLAUDE.md (`~/.claude/CLAUDE.md`)
+2. Read existing project CLAUDE.md
+3. Score against philosophy:
 
 | Check | Pass/Fail |
 |-------|-----------|
 | Under 100 lines | |
 | No redundant sections | |
+| No duplication of global CLAUDE.md | |
 | Commands are runnable | |
 | Patterns are specific | |
 | No enterprise jargon | |
