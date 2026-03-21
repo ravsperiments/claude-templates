@@ -42,6 +42,15 @@ Fix these first. Everything else is fixable in review.
 - Follow existing patterns exactly
 - Minimal changes only
 
+## File Organization
+
+| Folder | Purpose | Git |
+|--------|---------|-----|
+| `docs/` | Polished documentation | Committed |
+| `.dev/` | Working docs (plans, specs, designs) | Ignored |
+
+Working docs go in `.dev/`. Move to `docs/` when finalized.
+
 ## Commands
 
 | Command | Purpose |
@@ -51,3 +60,4 @@ Fix these first. Everything else is fixable in review.
 | `/commit` | Staged → commit |
 | `/pr` | Push + create PR |
 | `/docs` | Organize or create documentation |
+| `/dev` | Manage .dev/ workspace (plans, specs) |
