@@ -68,76 +68,204 @@ Rules:
 
 ## Standard Doc Types
 
-### spec.md — Business Requirements
+### spec.md — Product Requirements (PRD-style)
 
 ```markdown
 # <Project/Feature> Spec
 
+One-line summary of what this is.
+
 ## Problem
-What problem are we solving? Why does this matter?
+
+What problem are we solving? Who has this problem? Why now?
+
+## Users
+
+| User | Need | Current solution |
+|------|------|------------------|
+| Who | What they need | How they solve it today |
 
 ## Goals
-- Goal 1
-- Goal 2
+
+What success looks like:
+- Goal 1 (measurable)
+- Goal 2 (measurable)
 
 ## Non-Goals
-What we're explicitly NOT doing.
+
+Explicitly out of scope:
+- Not doing X
+- Not solving Y
 
 ## Requirements
-| ID | Requirement | Priority |
-|----|-------------|----------|
-| R1 | Description | Must/Should/Could |
 
-## Success Criteria
-How do we know this is done?
-```
+| ID | Requirement | Priority | Notes |
+|----|-------------|----------|-------|
+| R1 | Must do X | Must | Core functionality |
+| R2 | Should do Y | Should | Important but not blocking |
+| R3 | Could do Z | Could | Nice to have |
 
-### architecture.md — Technical Design
+## User Stories
 
-```markdown
-# <Project/Feature> Architecture
-
-## Overview
-High-level technical approach in 2-3 sentences.
-
-## Components
-| Component | Purpose |
-|-----------|---------|
-| Name | What it does |
-
-## Data Flow
-How data moves through the system. Use simple diagrams if needed.
-
-## Dependencies
-External services, libraries, APIs.
+- As a [user], I want [action] so that [benefit]
+- As a [user], I want [action] so that [benefit]
 
 ## Constraints
-Technical limitations, performance requirements.
 
-## Decisions
-| Decision | Rationale |
-|----------|-----------|
-| Choice made | Why |
+| Constraint | Impact |
+|------------|--------|
+| Budget/time | What it limits |
+| Technical | What it requires |
+| Business | What it demands |
+
+## Success Criteria
+
+How we know this is done:
+- [ ] Criteria 1
+- [ ] Criteria 2
+
+## Open Questions
+
+| Question | Status | Decision |
+|----------|--------|----------|
+| Unresolved issue | Open/Resolved | Answer if resolved |
 ```
 
-### design.md — Feature Technical Design
+### architecture.md — Technical Architecture
+
+```markdown
+# <Project> Architecture
+
+High-level technical design and system structure.
+
+## Overview
+
+2-3 sentences: what the system does technically, key technologies, deployment model.
+
+## System Diagram
+
+```
+[Client] --> [API] --> [Database]
+                  \--> [External Service]
+```
+
+(ASCII or link to diagram)
+
+## Components
+
+| Component | Purpose | Technology |
+|-----------|---------|------------|
+| Frontend | User interface | React/Next.js |
+| API | Business logic | Node.js |
+| Database | Data persistence | PostgreSQL |
+
+## Data Model
+
+| Entity | Fields | Relationships |
+|--------|--------|---------------|
+| User | id, email, name | has many Posts |
+| Post | id, title, body | belongs to User |
+
+## API Design
+
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| /api/users | GET | List users |
+| /api/users/:id | GET | Get user |
+
+## Data Flow
+
+1. User action triggers X
+2. Frontend calls Y
+3. API processes Z
+4. Database stores W
+
+## Security
+
+| Concern | Mitigation |
+|---------|------------|
+| Auth | JWT tokens, session management |
+| Data | Encryption at rest, HTTPS |
+| Access | Role-based permissions |
+
+## Dependencies
+
+| Dependency | Purpose | Risk |
+|------------|---------|------|
+| External API | Payment processing | Rate limits |
+| Library X | Auth | Maintenance |
+
+## Scalability
+
+How system handles growth:
+- Horizontal: Load balancing, replicas
+- Vertical: Resource limits
+- Data: Partitioning strategy
+
+## Decisions
+
+| Decision | Options considered | Choice | Rationale |
+|----------|-------------------|--------|-----------|
+| Database | Postgres vs Mongo | Postgres | Relational data, ACID |
+| Auth | JWT vs Sessions | JWT | Stateless API |
+```
+
+### design.md — Feature Design
 
 ```markdown
 # <Feature> Design
 
+Technical design for implementing a specific feature.
+
+## Summary
+
+One line: what this feature does and how.
+
 ## Approach
-How we're building this feature.
+
+How we're building this (high-level strategy).
 
 ## Changes
-| File/Component | Change |
-|----------------|--------|
-| path/to/file | What changes |
+
+| File/Component | Change | Reason |
+|----------------|--------|--------|
+| path/to/file | Add function X | Handles Y |
+| path/to/other | Modify Z | Support new flow |
 
 ## Interface
-API, props, or function signatures.
+
+```typescript
+// New or modified APIs, props, functions
+function newFeature(input: Type): ReturnType
+```
+
+## State Changes
+
+| State | Before | After |
+|-------|--------|-------|
+| Component state | X | Y |
+| Database | Schema A | Schema B |
 
 ## Edge Cases
-How we handle them.
+
+| Case | Handling |
+|------|----------|
+| Empty input | Return default |
+| Invalid data | Validation error |
+| Network failure | Retry with backoff |
+
+## Testing
+
+| Test | Type | Covers |
+|------|------|--------|
+| Test 1 | Unit | Core logic |
+| Test 2 | Integration | API flow |
+
+## Migration
+
+Steps to deploy (if breaking changes):
+1. Step 1
+2. Step 2
 ```
 
 ### plan.md — Execution Plan
@@ -145,21 +273,132 @@ How we handle them.
 ```markdown
 # <Project/Feature> Plan
 
+Execution roadmap with phases, tasks, and dependencies.
+
+## Summary
+
+One line: what we're delivering and rough timeline.
+
 ## Phases
-| Phase | Description | Depends On |
-|-------|-------------|------------|
-| 1 | What to do first | - |
-| 2 | What comes next | Phase 1 |
+
+| Phase | Description | Deliverable | Depends On |
+|-------|-------------|-------------|------------|
+| 1 | Setup | Infrastructure ready | - |
+| 2 | Core | MVP functionality | Phase 1 |
+| 3 | Polish | Production ready | Phase 2 |
 
 ## Tasks
-- [ ] Task 1
-- [ ] Task 2
+
+### Phase 1: Setup
+- [ ] Task 1.1
+- [ ] Task 1.2
+
+### Phase 2: Core
+- [ ] Task 2.1
+- [ ] Task 2.2
+
+### Phase 3: Polish
+- [ ] Task 3.1
+- [ ] Task 3.2
+
+## Dependencies
+
+| Dependency | Blocker for | Status |
+|------------|-------------|--------|
+| API access | Phase 2 | Pending |
+| Design review | Phase 3 | Done |
 
 ## Risks
-| Risk | Mitigation |
-|------|------------|
-| What could go wrong | How we handle it |
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|------------|--------|------------|
+| Scope creep | Medium | High | Strict non-goals |
+| Tech unknown | Low | Medium | Spike first |
+
+## Checkpoints
+
+| Checkpoint | Criteria | Phase |
+|------------|----------|-------|
+| Ready for review | Core features work | Phase 2 |
+| Ready for launch | All tests pass | Phase 3 |
 ```
+
+### api.md — API Reference
+
+```markdown
+# API Reference
+
+API endpoints and usage.
+
+## Base URL
+
+`https://api.example.com/v1`
+
+## Authentication
+
+How to authenticate (header, token format).
+
+## Endpoints
+
+### Resource Name
+
+#### List Resources
+
+`GET /resources`
+
+| Param | Type | Required | Description |
+|-------|------|----------|-------------|
+| limit | int | No | Max results (default 20) |
+
+Response:
+```json
+{ "data": [...], "total": 100 }
+```
+
+#### Get Resource
+
+`GET /resources/:id`
+
+Response:
+```json
+{ "id": "123", "name": "Example" }
+```
+
+## Errors
+
+| Code | Meaning |
+|------|---------|
+| 400 | Bad request |
+| 401 | Unauthorized |
+| 404 | Not found |
+```
+
+### Default — General Documentation
+
+For unknown doc types, use this structure:
+
+```markdown
+# <Title>
+
+One-line description of what this document covers.
+
+## Overview
+
+Context and background (2-3 paragraphs max).
+
+## <Main Content Sections>
+
+Organize by topic. Use:
+- Tables for structured data
+- Code blocks for examples
+- Lists for sequences
+
+## Reference
+
+Links, resources, related docs.
+```
+
+Let Claude determine appropriate sections based on content purpose.
 
 ## Naming Convention
 
@@ -208,6 +447,122 @@ If $ARGUMENTS is "sync" or "update":
 3. Check if CHANGELOG.md needs updating (if exists)
 4. Scan docs/ for outdated content
 5. Propose updates, ask for confirmation before editing
+
+If $ARGUMENTS is "review":
+Perform deep documentation review to consolidate and clean up docs.
+
+### Step 1: Inventory
+List all docs with:
+| File | Purpose | Lines | Issues |
+|------|---------|-------|--------|
+
+### Step 2: Naming Check
+Flag files not matching kebab-case:
+| Before | After |
+|--------|-------|
+| `API.md` | `api.md` |
+| `CODE_QUALITY.md` | `code-quality.md` |
+
+### Step 3: Redundancy Analysis
+Identify docs that should be merged or deleted:
+
+| File | Verdict | Reason |
+|------|---------|--------|
+| `sheets.md` | Merge → architecture.md | Data model belongs in architecture |
+| `code-quality.md` | Delete | Covered by /verify skill |
+| `old-plan.md` | Archive | Completed milestone |
+| `react-native.md` | Move → backlog or .dev/ | Future feature, not reference |
+
+Questions to ask:
+- Is this covered by a skill? → Delete
+- Is this a subset of another doc? → Merge
+- Is this a future plan? → Move to .dev/ or backlog
+- Is this completed work? → Archive
+- Is this duplicated in CLAUDE.md? → Keep in one place only
+
+### Step 4: Content Cleanup
+For each remaining doc, check:
+| Issue | Fix |
+|-------|-----|
+| Emoji | Remove |
+| Changelog/history | Remove (use git) |
+| File listings | Remove (use codebase) |
+| Marketing speak | Rewrite plainly |
+| Missing sections | Add from template |
+| Excessive detail | Summarize, link to code |
+
+### Step 5: Content Structure Check
+Each doc MUST follow this structure:
+
+```markdown
+# Title
+
+One-line purpose statement.
+
+## Section 1
+
+Content...
+
+## Section 2
+
+Content...
+```
+
+Structure rules:
+| Rule | Bad | Good |
+|------|-----|------|
+| Single H1 | Multiple `#` headings | One `#`, rest `##` or lower |
+| Purpose first | Jump into content | First line explains what this doc is |
+| Heading hierarchy | `#` → `###` (skip) | `#` → `##` → `###` (sequential) |
+| Consistent depth | Mix of `##` and `####` | Same level for same importance |
+| No orphan text | Text before first `##` | All content under a heading |
+| Section order | Random | Logical flow (overview → details → reference) |
+| Tables over lists | Long bullet lists | Tables for structured data |
+| Code blocks labeled | \`\`\` | \`\`\`bash or \`\`\`typescript |
+
+Writing style:
+| Avoid | Use |
+|-------|-----|
+| "This document describes..." | Just describe it |
+| "We will..." | Imperative: "Run..." |
+| Passive voice | Active voice |
+| Jargon without context | Plain language or define terms |
+| Walls of text | Short paragraphs, tables, lists |
+
+### Step 6: Report
+Present changes table:
+```
+Documentation Review:
+
+Renames:
+| Before | After |
+|--------|-------|
+
+Merges:
+| Source | Target | Sections moved |
+|--------|--------|----------------|
+
+Deletions:
+| File | Reason |
+|------|--------|
+
+Content fixes:
+| File | Changes |
+|------|---------|
+
+Link updates needed:
+| File | Old link | New link |
+|------|----------|----------|
+```
+
+### Step 7: Execute
+After user approval:
+1. Rename files (git mv)
+2. Merge content
+3. Delete redundant files
+4. Clean content
+5. Update all links in README.md, CLAUDE.md, and other docs
+6. Report final structure
 
 If $ARGUMENTS is "readme":
 1. Analyze codebase: package.json, main files, structure
@@ -309,6 +664,7 @@ If $ARGUMENTS is other text:
 
 ```
 /docs                     # Find and organize scattered docs
+/docs review              # Deep review: consolidate, clean, rename
 /docs sync                # Update docs based on git history
 /docs readme              # Update README.md from codebase
 
