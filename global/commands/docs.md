@@ -373,6 +373,377 @@ Response:
 | 404 | Not found |
 ```
 
+### deployment.md — Deployment Guide
+
+```markdown
+# Deployment
+
+How to deploy and operate this project.
+
+## Environments
+
+| Environment | URL | Purpose |
+|-------------|-----|---------|
+| Development | localhost:3000 | Local dev |
+| Staging | staging.example.com | Testing |
+| Production | example.com | Live |
+
+## Prerequisites
+
+What's needed before deploying:
+- [ ] Access to hosting platform
+- [ ] Environment variables configured
+- [ ] Database provisioned
+
+## Environment Variables
+
+| Variable | Required | Description | Example |
+|----------|----------|-------------|---------|
+| DATABASE_URL | Yes | Database connection | postgres://... |
+| API_KEY | Yes | External API key | sk_live_... |
+| DEBUG | No | Enable debug mode | false |
+
+## Deploy Steps
+
+### First-time Setup
+
+1. Step one
+2. Step two
+3. Step three
+
+### Regular Deploy
+
+```bash
+# Commands to deploy
+npm run build
+npm run deploy
+```
+
+## Infrastructure
+
+| Service | Provider | Purpose |
+|---------|----------|---------|
+| Hosting | Vercel/AWS/etc | Application |
+| Database | Supabase/RDS | Data |
+| Storage | S3/Cloudflare | Files |
+
+## Monitoring
+
+| What | Tool | Alert threshold |
+|------|------|-----------------|
+| Uptime | Pingdom | < 99.9% |
+| Errors | Sentry | > 10/min |
+| Performance | Vercel Analytics | p95 > 3s |
+
+## Rollback
+
+How to rollback if deployment fails:
+
+```bash
+# Rollback command
+vercel rollback
+```
+
+## Troubleshooting
+
+| Issue | Cause | Fix |
+|-------|-------|-----|
+| Build fails | Missing env var | Check .env |
+| 500 errors | DB connection | Check DATABASE_URL |
+```
+
+### changelog.md — Change Log
+
+```markdown
+# Changelog
+
+All notable changes to this project.
+
+Format: [Keep a Changelog](https://keepachangelog.com/)
+
+## [Unreleased]
+
+### Added
+- New feature X
+
+### Changed
+- Modified behavior Y
+
+### Fixed
+- Bug fix Z
+
+## [1.0.0] - 2024-01-15
+
+### Added
+- Initial release
+- Feature A
+- Feature B
+
+### Changed
+- Updated dependency X
+
+### Deprecated
+- Old API endpoint
+
+### Removed
+- Legacy feature
+
+### Fixed
+- Issue #123
+
+### Security
+- Patched vulnerability
+```
+
+Categories (use only what applies):
+- **Added** — New features
+- **Changed** — Changes to existing functionality
+- **Deprecated** — Soon-to-be removed features
+- **Removed** — Removed features
+- **Fixed** — Bug fixes
+- **Security** — Vulnerability fixes
+
+### contributing.md — Contribution Guide
+
+```markdown
+# Contributing
+
+How to contribute to this project.
+
+## Quick Start
+
+1. Fork the repo
+2. Create a branch (`git checkout -b feature/name`)
+3. Make changes
+4. Run tests (`npm test`)
+5. Commit (`git commit -m "feat: add X"`)
+6. Push (`git push origin feature/name`)
+7. Open PR
+
+## Development Setup
+
+```bash
+# Clone
+git clone <repo>
+cd <project>
+
+# Install
+npm install
+
+# Run
+npm run dev
+```
+
+## Code Standards
+
+| Area | Standard |
+|------|----------|
+| Style | Prettier + ESLint |
+| Commits | Conventional commits |
+| Tests | Required for new features |
+| Docs | Update if behavior changes |
+
+## Commit Messages
+
+Format: `type(scope): description`
+
+| Type | Use for |
+|------|---------|
+| feat | New feature |
+| fix | Bug fix |
+| docs | Documentation |
+| refactor | Code restructuring |
+| test | Adding tests |
+| chore | Maintenance |
+
+## Pull Requests
+
+- Keep PRs focused (one feature/fix)
+- Update tests and docs
+- Fill out PR template
+- Request review
+```
+
+### testing.md — Testing Guide
+
+```markdown
+# Testing
+
+How to test this project.
+
+## Quick Start
+
+```bash
+# Run all tests
+npm test
+
+# Run with coverage
+npm run test:coverage
+
+# Run specific test
+npm test -- --grep "test name"
+```
+
+## Test Structure
+
+```
+tests/
+├── unit/           # Unit tests
+├── integration/    # Integration tests
+└── e2e/            # End-to-end tests
+```
+
+## Test Types
+
+| Type | Purpose | Speed | Scope |
+|------|---------|-------|-------|
+| Unit | Test functions in isolation | Fast | Single function |
+| Integration | Test components together | Medium | Multiple units |
+| E2E | Test full user flows | Slow | Entire app |
+
+## Writing Tests
+
+```typescript
+describe('Feature', () => {
+  it('should do X when Y', () => {
+    // Arrange
+    const input = 'test';
+
+    // Act
+    const result = feature(input);
+
+    // Assert
+    expect(result).toBe('expected');
+  });
+});
+```
+
+## Coverage Requirements
+
+| Metric | Minimum |
+|--------|---------|
+| Statements | 80% |
+| Branches | 75% |
+| Functions | 80% |
+| Lines | 80% |
+
+## Test Data
+
+| Data | Location | Purpose |
+|------|----------|---------|
+| Fixtures | `tests/fixtures/` | Static test data |
+| Factories | `tests/factories/` | Dynamic test data |
+| Mocks | `tests/mocks/` | External service mocks |
+
+## CI/CD
+
+Tests run automatically on:
+- Pull request
+- Push to main
+- Nightly schedule
+```
+
+### runbook.md — Operations Runbook
+
+```markdown
+# Runbook
+
+Operational procedures for incidents and maintenance.
+
+## Contacts
+
+| Role | Name | Contact |
+|------|------|---------|
+| On-call | Rotation | PagerDuty |
+| Escalation | Team lead | Slack #team |
+
+## Common Incidents
+
+### Service Down
+
+**Symptoms**: 5xx errors, health check failing
+
+**Diagnosis**:
+```bash
+# Check service status
+kubectl get pods
+
+# Check logs
+kubectl logs <pod>
+```
+
+**Resolution**:
+1. Check recent deployments
+2. Rollback if needed: `vercel rollback`
+3. Check database connectivity
+4. Restart service if stuck
+
+### High Latency
+
+**Symptoms**: p95 > 3s, slow responses
+
+**Diagnosis**:
+```bash
+# Check resource usage
+kubectl top pods
+
+# Check database
+SELECT * FROM pg_stat_activity;
+```
+
+**Resolution**:
+1. Check for slow queries
+2. Scale horizontally if CPU-bound
+3. Check external dependencies
+
+### Database Issues
+
+**Symptoms**: Connection errors, timeouts
+
+**Diagnosis**:
+```bash
+# Check connections
+SELECT count(*) FROM pg_stat_activity;
+
+# Check locks
+SELECT * FROM pg_locks WHERE NOT granted;
+```
+
+**Resolution**:
+1. Kill long-running queries
+2. Increase connection pool
+3. Failover if primary down
+
+## Maintenance Procedures
+
+### Database Backup
+
+```bash
+# Manual backup
+pg_dump $DATABASE_URL > backup.sql
+```
+
+Schedule: Daily at 00:00 UTC
+
+### Log Rotation
+
+Logs retained for 30 days.
+Location: CloudWatch / Datadog
+
+### Certificate Renewal
+
+Certificates auto-renew via Let's Encrypt.
+Check expiry: `openssl s_client -connect example.com:443`
+
+## Escalation
+
+| Severity | Response time | Escalate after |
+|----------|---------------|----------------|
+| P1 - Down | 15 min | 30 min |
+| P2 - Degraded | 1 hour | 4 hours |
+| P3 - Minor | 24 hours | 3 days |
+```
+
 ### Default — General Documentation
 
 For unknown doc types, use this structure:
@@ -480,18 +851,34 @@ Questions to ask:
 - Is this completed work? → Archive
 - Is this duplicated in CLAUDE.md? → Keep in one place only
 
-### Step 4: Content Cleanup
-For each remaining doc, check:
+### Step 4: Template Compliance
+For known doc types, check against templates and add missing sections:
+
+| Doc Type | Required Sections |
+|----------|-------------------|
+| spec.md | Problem, Users, Goals, Non-Goals, Requirements, Success Criteria |
+| architecture.md | Overview, Components, Data Model, Security, Decisions |
+| design.md | Approach, Changes, Interface, Edge Cases |
+| plan.md | Phases, Tasks, Dependencies, Risks |
+| api.md | Base URL, Auth, Endpoints, Errors |
+| deployment.md | Environments, Env Vars, Deploy Steps, Rollback |
+| changelog.md | Unreleased + versioned sections with Added/Changed/Fixed |
+| testing.md | Quick Start, Test Structure, Test Types, Coverage |
+| runbook.md | Contacts, Common Incidents, Maintenance, Escalation |
+
+If doc matches a known type but is missing sections → add them.
+
+### Step 5: Content Cleanup
+For each doc, check:
 | Issue | Fix |
 |-------|-----|
 | Emoji | Remove |
-| Changelog/history | Remove (use git) |
+| Changelog/history in non-changelog | Remove (use git) |
 | File listings | Remove (use codebase) |
 | Marketing speak | Rewrite plainly |
-| Missing sections | Add from template |
 | Excessive detail | Summarize, link to code |
 
-### Step 5: Content Structure Check
+### Step 6: Content Structure Check
 Each doc MUST follow this structure:
 
 ```markdown
@@ -529,7 +916,7 @@ Writing style:
 | Jargon without context | Plain language or define terms |
 | Walls of text | Short paragraphs, tables, lists |
 
-### Step 6: Report
+### Step 7: Report
 Present changes table:
 ```
 Documentation Review:
@@ -555,7 +942,7 @@ Link updates needed:
 |------|----------|----------|
 ```
 
-### Step 7: Execute
+### Step 8: Execute
 After user approval:
 1. Rename files (git mv)
 2. Merge content
