@@ -15,7 +15,8 @@ PLAN → APPROVE → EXECUTE → VERIFY → COMMIT
 1. Present plan, wait for "yes"
 2. Execute with minimal changes
 3. Run `/verify` before any commit
-4. Use `/commit` for proper format
+4. Check for new files that should be gitignored (build artifacts, secrets, .dev/)
+5. Use `/commit` for proper format
 
 ## Bans
 
