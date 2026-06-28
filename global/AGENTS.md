@@ -1,4 +1,4 @@
-# Global Claude Agent Policy
+# Global Codex Agent Policy
 
 This file is generated from `AGENT_POLICY.md`.
 Edit the shared source, then run `sync-agent-globals.sh`.
@@ -47,3 +47,18 @@ Projects should stay understandable and forkable by strangers.
 
 Use plain, direct prose. Keep replies concise. Say what changed, what it means,
 and what remains.
+
+## Codex Skill Bootstrap
+
+<EXTREMELY_IMPORTANT>
+You have a lean shared coding-agent skill set. For tasks that match a skill,
+load it with `~/.codex/superpowers/.codex/superpowers-codex use-skill <skill-name>`.
+
+Active skills are:
+
+- `superpowers:verification-before-completion`
+- `superpowers:systematic-debugging`
+- `superpowers:code-review`
+
+Do not bootstrap or load archived skills unless the user explicitly asks.
+</EXTREMELY_IMPORTANT>

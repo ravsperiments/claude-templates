@@ -1,8 +1,3 @@
-# Global Claude Agent Policy
-
-This file is generated from `AGENT_POLICY.md`.
-Edit the shared source, then run `sync-agent-globals.sh`.
-
 # Shared Global Agent Policy
 
 ## Context
