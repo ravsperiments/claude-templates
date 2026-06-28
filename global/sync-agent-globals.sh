@@ -11,38 +11,27 @@ if [[ ! -f "$POLICY" ]]; then
   exit 1
 fi
 
-{
-  echo "# Global Claude Agent Policy"
-  echo
-  echo 'This file is generated from `AGENT_POLICY.md`.'
-  echo 'Edit the shared source, then run `sync-agent-globals.sh`.'
-  echo
-  cat "$POLICY"
-} > "$CLAUDE_OUT"
+cat "$POLICY" > "$CLAUDE_OUT"
 
 {
-  echo "# Global Codex Agent Policy"
-  echo
-  echo 'This file is generated from `AGENT_POLICY.md`.'
-  echo 'Edit the shared source, then run `sync-agent-globals.sh`.'
-  echo
   cat "$POLICY"
   cat <<'CODEX_EXTRA'
 
-## Codex Skill Bootstrap
+## Codex Skill Loading
 
-<EXTREMELY_IMPORTANT>
-You have a lean shared coding-agent skill set. For tasks that match a skill,
-load it with `~/.codex/superpowers/.codex/superpowers-codex use-skill <skill-name>`.
-
-Active skills are:
+Use only the lean shared coding-agent skills, and only when directly relevant:
 
 - `superpowers:verification-before-completion`
 - `superpowers:systematic-debugging`
 - `superpowers:code-review`
 
-Do not bootstrap or load archived skills unless the user explicitly asks.
-</EXTREMELY_IMPORTANT>
+Load a skill with:
+
+```bash
+~/.codex/superpowers/.codex/superpowers-codex use-skill <skill-name>
+```
+
+Do not load archived skills unless explicitly asked.
 CODEX_EXTRA
 } > "$CODEX_OUT"
 

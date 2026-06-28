@@ -1,64 +1,59 @@
-# Global Codex Agent Policy
+# Global Agent Policy
 
-This file is generated from `AGENT_POLICY.md`.
-Edit the shared source, then run `sync-agent-globals.sh`.
+## Philosophy
 
-# Shared Global Agent Policy
+- Simplicity is the feature.
+- Use one dial of complexity: solve the problem with the smallest design that
+  remains easy to understand later.
+- Prefer code that can be read, debugged, changed, and forked over cleverness or
+  architecture for its own sake.
+- Understanding matters more than speed. Do not create cognitive debt.
+- Projects should be understandable and forkable by strangers.
 
-## Context
-
-I am a solo developer building personal tools, hobby systems, and small
-products. Explain unfamiliar shell, git, deployment, and coding mechanics
-briefly in passing. Name established concepts when useful.
-
-Projects should stay understandable and forkable by strangers.
-
-## Working Style
+## Standard Practice
 
 - Read the current code and docs before changing behavior.
-- For substantial or ambiguous work, state the plan before editing.
-- For small direct fixes, implement, verify, and report the evidence.
-- Prefer simple, local changes over broad abstractions.
-- Keep project facts, deployment details, and product policy in repo docs, not
-  global instructions.
-
-## Engineering Rules
-
-- Follow existing project patterns first.
-- Keep changes narrowly scoped to the request.
-- Do not add "just in case" code.
-- Do not do unrelated refactors.
-- Do not leave debug statements or commented-out code.
-- Use a helper only when it names real complexity, isolates risk, supports
-  testing, or matches an existing local pattern.
-- Put documentation where the repo convention says; do not force all markdown
-  into one global layout.
+- Match the repo's existing patterns before introducing a new one.
+- For substantial, ambiguous, or risky work, state the plan before editing.
+- For small direct fixes, make the change, verify it, and report the evidence.
+- Keep changes scoped to the request.
+- Do not add "just in case" features.
+- Do not bundle unrelated refactors with the requested work.
+- Do not leave debug statements, dead code, or commented-out code.
+- Add an abstraction only when it removes real duplication, names real
+  complexity, isolates risk, supports testing, or matches an established local
+  pattern.
+- Put project facts, deployment details, product policy, and documentation where
+  the repo convention says. Do not force one global layout on every project.
 
 ## Verification
 
-- Before claiming work is complete or committing, run the relevant verification
-  for the change.
+- Verify before claiming work is complete or committing.
+- Use the narrowest check that proves the change, then broaden when risk calls
+  for it.
 - For docs-only changes, a whitespace/diff check is usually enough.
-- For runtime changes, run focused tests first, then broader gates when risk
-  justifies it.
+- For runtime changes, run focused tests first; run build, lint, or broader
+  suites when the change touches shared behavior.
 - State what was not run.
 
 ## Communication
 
 Use plain, direct prose. Keep replies concise. Say what changed, what it means,
-and what remains.
+and what remains. Explain unfamiliar shell, git, deployment, and coding
+mechanics briefly in passing. Name established concepts when useful.
 
-## Codex Skill Bootstrap
+## Codex Skill Loading
 
-<EXTREMELY_IMPORTANT>
-You have a lean shared coding-agent skill set. For tasks that match a skill,
-load it with `~/.codex/superpowers/.codex/superpowers-codex use-skill <skill-name>`.
-
-Active skills are:
+Use only the lean shared coding-agent skills, and only when directly relevant:
 
 - `superpowers:verification-before-completion`
 - `superpowers:systematic-debugging`
 - `superpowers:code-review`
 
-Do not bootstrap or load archived skills unless the user explicitly asks.
-</EXTREMELY_IMPORTANT>
+Load a skill with:
+
+```bash
+~/.codex/superpowers/.codex/superpowers-codex use-skill <skill-name>
+```
+
+Do not load archived skills unless explicitly asked.
